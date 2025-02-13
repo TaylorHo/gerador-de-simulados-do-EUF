@@ -7,7 +7,7 @@ from PIL import Image
 # Constants
 DPI = 96
 MM_PER_PIXEL = 25.4 / DPI     # Conversion factor from pixels to millimeters.
-ALTERNATIVE_SCALE = 0.5       # Scale factor to resize alternative images.
+ALTERNATIVE_SCALE = 0.75      # Scale factor to resize alternative images.
 LETTER_CELL_WIDTH = 4         # Width (in mm) reserved for the letter label.
 LETTER_CELL_MARGIN = 2        # Gap (in mm) between the letter label and the alternative image.
 VERTICAL_GAP = 2              # Gap (in mm) between alternative rows.
@@ -153,6 +153,12 @@ def create_simulation_exams(questions, output_folder):
                 # Compute scaled dimensions for the alternative image.
                 scaled_w = (alt_w * MM_PER_PIXEL) * ALTERNATIVE_SCALE
                 scaled_h = (alt_h * MM_PER_PIXEL) * ALTERNATIVE_SCALE
+
+                available_alt_width = available_width - (LETTER_CELL_WIDTH + LETTER_CELL_MARGIN)
+                if scaled_w > available_alt_width:
+                    factor_width = available_alt_width / scaled_w
+                    scaled_w = scaled_w * factor_width
+                    scaled_h = scaled_h * factor_width
 
                 # Print the letter label on the left.
                 letter_x = pdf.l_margin
