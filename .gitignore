@@ -2,3 +2,4 @@ simulations/
 exams.backup/
 venv/
 .DS_Store
+*.pdf

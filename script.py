@@ -4,10 +4,13 @@ import random
 from fpdf import FPDF
 from PIL import Image
 
+exams_dir = "exams"
+output_folder = "simulations"
+
 # Constants
 DPI = 96
 MM_PER_PIXEL = 25.4 / DPI     # Conversion factor from pixels to millimeters.
-ALTERNATIVE_SCALE = 0.75      # Scale factor to resize alternative images.
+ALTERNATIVE_SCALE = 0.6       # Scale factor to resize alternative images.
 LETTER_CELL_WIDTH = 4         # Width (in mm) reserved for the letter label.
 LETTER_CELL_MARGIN = 2        # Gap (in mm) between the letter label and the alternative image.
 VERTICAL_GAP = 2              # Gap (in mm) between alternative rows.
@@ -195,8 +198,6 @@ def create_full_exams(questions, output_folder):
         print(f"Created {pdf_filename}")
 
 def main():
-    exams_dir = "exams"
-    output_folder = "simulations"
     os.makedirs(output_folder, exist_ok=True)
 
     questions = load_questions(exams_dir)
