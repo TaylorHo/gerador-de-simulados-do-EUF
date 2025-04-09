@@ -16,6 +16,7 @@ LETTER_CELL_MARGIN = 2
 VERTICAL_GAP = 2
 GAP_AFTER_QUESTION = 5
 ALT_BOTTOM_GAP = 10
+ALTERNATIVES_PRE_SPACE = 5
 
 def load_all_questions(exams_dir):
     questions = []
@@ -83,8 +84,8 @@ def draw_question(pdf, question):
                 scale = max_width / scaled_w
                 scaled_w *= scale
                 scaled_h *= scale
-            pdf.text(x=pdf.l_margin, y=y + scaled_h / 2, txt=letters[i])
-            pdf.image(alt, x=pdf.l_margin + LETTER_CELL_WIDTH + LETTER_CELL_MARGIN, y=y, w=scaled_w, h=scaled_h)
+            pdf.text(x=pdf.l_margin + ALTERNATIVES_PRE_SPACE, y=y + scaled_h / 2, txt=letters[i])
+            pdf.image(alt, x=pdf.l_margin + ALTERNATIVES_PRE_SPACE + LETTER_CELL_WIDTH + LETTER_CELL_MARGIN, y=y, w=scaled_w, h=scaled_h)
             y += scaled_h + VERTICAL_GAP
         except Exception as e:
             print(f"Error loading alternative image {alt}: {e}")
